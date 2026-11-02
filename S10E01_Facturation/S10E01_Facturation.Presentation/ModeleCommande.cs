@@ -46,6 +46,7 @@ public sealed class ModeleCommande : IObservable<EtatCommandeDto>, IDisposable
 
         // S10-S : inscrire cet observateur dans la liste.
         // À compléter : l’objet retourné ci-dessous sait déjà désabonner.
+        m_observateurs.Add(observateur);
         return new AbonnementCommande(m_observateurs, observateur);
     }
 
@@ -92,6 +93,7 @@ public sealed class ModeleCommande : IObservable<EtatCommandeDto>, IDisposable
             {
                 try
                 {
+                    observateur.OnNext(etat);
                     // S10-N : transmettre cet instantané à cet observateur.
                     // À compléter : appeler le contrat IObserver<EtatCommandeDto>.
                 }
